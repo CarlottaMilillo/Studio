@@ -12,6 +12,10 @@ namespace CLSdb
     /// definisco la struttura dinamica dei campi del db 
     /// </summary>
     public class utenze
+        //declared variables with no value assigned 
+        //can be read and set 
+        //to declare a class of structures: visibility: public or private type: string, int ecc name and commands 
+        // 
     {
         public string id { get; set; }
         public string nome { get; set; }
@@ -50,9 +54,9 @@ namespace CLSdb
 
 
         /// <summary>
-        /// prende i dati da una tabella 
+        /// takes data form table 
         /// </summary>
-        /// <returns> lista di dati </returns>
+        /// <returns> list of datas </returns>
         public  List<utenze> GetData(string strconn, string q)
         {
             List<utenze> result = new List<utenze>();
@@ -60,13 +64,14 @@ namespace CLSdb
 
             try
             {
-                string query = q; //parametri per la chiamata al database
+                string query = q; //parameters passed to the class that gets the data from db 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataReader dr;
                 conn.Open();
                 dr = cmd.ExecuteReader();
+        
 
-                //se il db ha righe
+                //if the db has rows 
                 if (dr.HasRows)
                 {
                     Console.WriteLine("ecco i dati del database:\n");
@@ -79,7 +84,7 @@ namespace CLSdb
                             indirizzo = dr["indirizzo"].ToString(),
                             città = dr["città"].ToString(),
                             età = (int) dr["età"],//casting , forzatura 
-                            id= dr["id"].ToString() //to string necessairo per passare da unique identifier a stringa 
+                            id= dr["id"].ToString() //to string (to pass from unique identifier to a string ) 
                         });
                     }
                 }
@@ -93,7 +98,8 @@ namespace CLSdb
             conn.Close();
             return result;
         }
-        public List<utenze> GetData(string strconn)
+        public List<utenze> GetData(string strconn) ///declaring more classes wiht the same purpose but with differet parameters allows 
+        ///the user to personalize the class they bought depending on what they need to do 
         {
 
             return new List<utenze>();
